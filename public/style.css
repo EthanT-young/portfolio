@@ -109,7 +109,8 @@ header nav a:hover { color: var(--text); }
 
 .hero-meta {
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
     margin-top: 2rem;
     font-size: 0.85rem;
     color: var(--text-dim);
