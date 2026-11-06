@@ -67,7 +67,7 @@ export function Header() {
                     <Link
                       to={item.to}
                       className={cls}
-                      aria-current={pathname === item.to ? 'page' : undefined}
+                      aria-current={pathname === item.to ? 'page' : isActive ? 'true' : undefined}
                     >
                       {pill}
                       {label}

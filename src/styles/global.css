@@ -1430,6 +1430,35 @@ html[data-motion='reduced'] .scroll-cue {
 /* ---------- Print ---------- */
 
 @media print {
+    :root {
+        --bg: #fff;
+        --surface: #fff;
+        --surface-2: #fff;
+        --border: #ccc;
+        --border-strong: #999;
+        --text: #000;
+        --text-dim: #222;
+        --text-faint: #444;
+        --accent: #8a3a1f;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+
+    .section-rule {
+        transform: none !important;
+    }
+
+    .card,
+    .stat,
+    .now-card {
+        background: #fff;
+        box-shadow: none;
+    }
+
     .backdrop,
     .scroll-progress,
     .motion-toggle,

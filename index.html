@@ -16,8 +16,11 @@
             try { pref = localStorage.getItem('motion'); } catch (e) {}
             var sys = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (pref === 'reduced' || (pref !== 'full' && sys)) d.setAttribute('data-motion', 'reduced');
-            // If the app never starts, show everything rather than leave content hidden.
-            setTimeout(function () { if (!window.__hydrated) d.classList.remove('js'); }, 4000);
+            // If the app never starts, show everything rather than leave content hidden:
+            // immediately when a script fails to load, otherwise after a short wait.
+            var show = function () { if (!window.__hydrated) d.classList.remove('js'); };
+            window.addEventListener('error', function (e) { if (e.target && e.target.tagName === 'SCRIPT') show(); }, true);
+            setTimeout(show, 3000);
         })();
     </script>
 </head>

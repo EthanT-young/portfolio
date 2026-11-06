@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigationType } from 'react-router-dom';
 import { applyHead, metaFor } from '../routes';
 
 let lastPath: string | null = null;
+/** Last scroll position of each history entry, so Back/Forward can return to it. */
+const scrollByKey = new Map<string, number>();
 
 /**
  * Runs when a page mounts. On in-app navigation (not the first load) it updates
@@ -14,7 +16,14 @@ let lastPath: string | null = null;
  */
 export function usePageEnter<T extends HTMLElement = HTMLHeadingElement>() {
   const headingRef = useRef<T>(null);
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
+  const navType = useNavigationType();
+
+  useEffect(() => {
+    const save = () => scrollByKey.set(key, window.scrollY);
+    window.addEventListener('scroll', save, { passive: true });
+    return () => window.removeEventListener('scroll', save);
+  }, [key]);
 
   useEffect(() => {
     applyHead(metaFor(pathname));
@@ -22,6 +31,13 @@ export function usePageEnter<T extends HTMLElement = HTMLHeadingElement>() {
     const same = lastPath === pathname;
     lastPath = pathname;
     if (first || same) return; // initial load: the browser already handled scroll and hash
+
+    // Back/Forward: put the reader back where they were, and leave focus alone.
+    const saved = navType === 'POP' ? scrollByKey.get(key) : undefined;
+    if (saved !== undefined) {
+      window.scrollTo(0, saved);
+      return;
+    }
 
     let id = hash.slice(1);
     try {

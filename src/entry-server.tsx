@@ -10,7 +10,7 @@ export { routes };
 export function render(url: string): { html: string; head: string } {
   const html = renderToString(
     <StrictMode>
-      <StaticRouter location={url}>
+      <StaticRouter location={url} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <App />
       </StaticRouter>
     </StrictMode>,

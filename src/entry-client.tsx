@@ -12,7 +12,7 @@ declare global {
 const container = document.getElementById('root')!;
 const app = (
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <App />
     </BrowserRouter>
   </StrictMode>

@@ -157,6 +157,20 @@ for (const route of routes) {
   const top = await page.evaluate(() => document.getElementById('skills')?.getBoundingClientRect().top ?? 9999);
   if (top < 0 || top > 300) fail(`#skills not scrolled into view after nav (top=${top})`);
 
+  // Back returns to the previous scroll position instead of the top.
+  await page.goto(base + '/', { waitUntil: 'networkidle' });
+  await page.waitForFunction(() => window.__hydrated === true);
+  await page.evaluate(() => document.getElementById('projects').scrollIntoView());
+  await page.waitForTimeout(300);
+  const before = await page.evaluate(() => window.scrollY);
+  await page.click('a.card-link >> nth=0');
+  await page.waitForURL('**/projects/cloud-infrastructure/');
+  await page.waitForTimeout(800);
+  await page.goBack();
+  await page.waitForTimeout(1000);
+  const after = await page.evaluate(() => window.scrollY);
+  if (Math.abs(after - before) > 40) fail(`Back restored scrollY ${after}, expected about ${before}`);
+
   // Motion toggle: aria-pressed flips and the preference persists across reloads.
   await page.click('.motion-toggle');
   const pressed = await page.getAttribute('.motion-toggle', 'aria-pressed');
