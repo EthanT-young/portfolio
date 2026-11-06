@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebel Locate — Ethan Young</title>
+    <meta name="description" content="A team machine learning course project: locating the UNLV building a photo was taken near from its GPS metadata (KNN, 92% accuracy) and labeling the type of room (CNN).">
+    <link rel="canonical" href="https://ethantyoung.com/projects/rebel-locate/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rebel Locate — Ethan Young">
+    <meta property="og:description" content="A team machine learning course project: locating the UNLV building a photo was taken near from its GPS metadata (KNN, 92% accuracy) and labeling the type of room (CNN).">
+    <meta property="og:url" content="https://ethantyoung.com/projects/rebel-locate/">
+
+    <link rel="stylesheet" href="/style.css?v=6">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="/">Ethan Young</a>
+        <nav aria-label="Main">
+            <a href="/#experience">Experience</a>
+            <a href="/#education">Education</a>
+            <a href="/projects/">Projects</a>
+            <a href="/#skills">Skills</a>
+            <a href="/#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container" id="main">
+
+    <div class="page-hero">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/projects/">Projects</a> / <span aria-current="page">Rebel Locate</span></nav>
+        <h1>Rebel Locate</h1>
+        <p>A team project for my machine learning course: locating the UNLV building a photo was taken near from its GPS metadata, and labeling the type of room. My KNN model reached 92% accuracy on the team's 6,000+ image dataset.</p>
+        <div class="project-meta">
+            <time class="role-date" datetime="2025-01">Jan 2025 – May 2025</time>
+            <span class="project-tech">Python · PyTorch · scikit-learn · NumPy</span>
+            <span class="badge">Team of 5</span>
+        </div>
+    </div>
+
+    <section>
+        <h2>Overview</h2>
+        <div class="prose">
+            <p>Rebel Locate is a geolocator and room-labeling tool for UNLV. This page covers my implementation.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Approach</h2>
+        <div class="prose">
+            <p>We split the main campus between us, and each of us photographed every building in our section. After agreeing on a shared design, we each built our own implementation and compared results across the team.</p>
+            <p>My implementation:</p>
+            <ul>
+                <li><strong>Building (KNN).</strong> A K-nearest neighbors classifier trained on the latitude and longitude from each photo's EXIF metadata, with K chosen by 10-fold cross-validation.</li>
+                <li><strong>Room (CNN).</strong> Takes only the predicted building's photos and fine-tunes the last layer of a ResNet-18 pre-trained on Places365, a scene-recognition dataset, with one output per room in that building (such as hallway, lounge or stairwell).</li>
+                <li><strong>No near-duplicate leakage.</strong> Photos taken within about a meter of each other, such as burst shots, always stay on the same side of every training/testing split, so near-duplicates can't inflate the reported accuracy.</li>
+                <li><strong>Output.</strong> The top three buildings and rooms for a photo, each with its probability.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Results</h2>
+        <div class="prose">
+            <ul>
+                <li><strong>6,000+ images</strong> in the team's dataset, covering every building on the main campus.</li>
+                <li><strong>92% accuracy</strong> for my KNN building-proximity model.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Stack</h2>
+        <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">torchvision</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">Pillow</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Links</h2>
+        <div class="prose">
+            <ul>
+                <li><a href="https://github.com/EthanT-young/Rebel-Locate" target="_blank" rel="noopener noreferrer">Source code on GitHub</a> (my implementation)</li>
+            </ul>
+        </div>
+    </section>
+
+    <p class="back-link"><a class="more-link" href="/projects/">← All projects</a></p>
+
+</main>
+
+<footer id="contact" class="container">
+    <p>Ethan Young · <a href="mailto:ethanthanhyoung@gmail.com">ethanthanhyoung@gmail.com</a></p>
+    <p class="footer-links"><a href="https://www.linkedin.com/in/ethan-t-young/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ethan-t-young</a> · <a href="https://github.com/EthanT-Young" target="_blank" rel="noopener noreferrer">github.com/EthanT-Young</a></p>
+</footer>
+
+<script src="/script.js"></script>
+</body>
+</html>

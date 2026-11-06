@@ -1,0 +1,18 @@
+# Never commit AI-assistant / design-tool files.
+CLAUDE*.md
+[Cc]laude*
+.claude/
+.mcp.json
+AGENTS.md
+GEMINI.md
+.gemini/
+.cursor/
+.cursorrules
+.aider*
+.github/copilot-instructions.md
+.impeccable/
+DESIGN.md
+PRODUCT.md
+
+# Server-local opt-in marker for deploy/deploy.sh; never committed.
+.deploy
