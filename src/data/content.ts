@@ -97,8 +97,8 @@ export const projects: ProjectSummary[] = [
     date: 'Jan 2025 – May 2025',
     datetime: '2025-01',
     tech: 'Python · PyTorch · scikit-learn · NumPy',
-    teaser: 'Team machine learning course project that locates UNLV buildings from the GPS data in photos. My KNN model reached 92% accuracy.',
-    summary: 'A team project for my machine learning course that locates the UNLV building a photo was taken near from its GPS metadata and labels the type of room. My KNN model reached 92% accuracy.',
+    teaser: 'Team machine learning course project that locates UNLV buildings from the GPS data in photos. My KNN model found the building with 98.01% accuracy, and my CNN labeled the room with 91.83%.',
+    summary: 'A team project for my machine learning course that locates the UNLV building a photo was taken near from its GPS metadata and labels the type of room. My KNN building model reached 98.01% accuracy, and my CNN room model reached 91.83%.',
   },
 ];
 

@@ -9,7 +9,7 @@ export function RebelLocate() {
       <PageHero
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Projects', to: '/projects/' }, { label: 'Rebel Locate' }]}
         title="Rebel Locate"
-        lede="A team project for my machine learning course: locating the UNLV building a photo was taken near from its GPS metadata, and labeling the type of room. My KNN model reached 92% accuracy on the team's 6,000+ image dataset."
+        lede="A team project for my machine learning course: locating the UNLV building a photo was taken near from its GPS metadata, and labeling the type of room. On the team's 6,000+ image dataset, my KNN building model reached 98.01% accuracy and my CNN room model reached 91.83%."
         meta={
           <>
             <time className="mono-meta" dateTime="2025-01">
@@ -23,8 +23,12 @@ export function RebelLocate() {
 
       <Reveal className="stats">
         <div className="stat">
-          <span className="stat-value">92%</span>
-          <span className="stat-label">accuracy for my KNN building-proximity model</span>
+          <span className="stat-value">98.01%</span>
+          <span className="stat-label">accuracy for my KNN building model</span>
+        </div>
+        <div className="stat">
+          <span className="stat-value">91.83%</span>
+          <span className="stat-label">accuracy for my CNN room model</span>
         </div>
         <div className="stat">
           <span className="stat-value">6,000+</span>
@@ -74,7 +78,10 @@ export function RebelLocate() {
               <strong>6,000+ images</strong> in the team's dataset, covering every building on the main campus.
             </li>
             <li>
-              <strong>92% accuracy</strong> for my KNN building-proximity model.
+              <strong>98.01% accuracy</strong> for my KNN building-proximity model.
+            </li>
+            <li>
+              <strong>91.83% accuracy</strong> for my CNN room-labeling model.
             </li>
           </ul>
         </Reveal>

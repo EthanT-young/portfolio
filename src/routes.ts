@@ -35,7 +35,7 @@ export const routes: RouteMeta[] = [
   {
     path: '/projects/rebel-locate/',
     title: 'Rebel Locate — Ethan Young',
-    description: 'A team machine learning course project: locating the UNLV building a photo was taken near from its GPS metadata (KNN, 92% accuracy) and labeling the type of room (CNN).',
+    description: 'A team machine learning course project: locating the UNLV building a photo was taken near from its GPS metadata (KNN, 98.01% accuracy) and labeling the type of room (CNN, 91.83% accuracy).',
     ogType: 'article',
   },
 ];
