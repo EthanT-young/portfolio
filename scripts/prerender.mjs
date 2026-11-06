@@ -25,4 +25,13 @@ for (const route of routes) {
   console.log(`prerendered ${route.path}`);
 }
 
+// Not-found page, so the server can answer unknown URLs with a titled page
+// in the site's language instead of an empty body (Caddy: handle_errors).
+{
+  const { html, head } = render('/404/');
+  const page = template.replace('<!--app-head-->', () => head).replace('<!--app-html-->', () => html);
+  await writeFile(path.join(outDir, '404.html'), page);
+  console.log('prerendered 404.html');
+}
+
 await rm(ssrDir, { recursive: true, force: true });

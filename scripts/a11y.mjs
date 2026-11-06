@@ -1,7 +1,7 @@
 // Accessibility and smoke tests against the built site in public/.
 //   npm run build && npm run test:a11y
 // Serves public/ like Caddy's file_server (directory index.html, no SPA
-// fallback), then for every route: runs axe-core with the WCAG 2.0 A/AA rules,
+// fallback), then for every route: runs axe-core with the WCAG 2.2 A/AA rules (2.0, 2.1 and 2.2 tags),
 // fails on console errors (e.g. hydration mismatches), checks 320px reflow,
 // the skip link, rendering without JavaScript, and in-app navigation focus.
 // Set SHOTS=dir to also save screenshots.
@@ -50,7 +50,7 @@ async function axe(page, label) {
   await page.addScriptTag({ content: axeSource });
   const result = await page.evaluate(() =>
     // eslint-disable-next-line no-undef
-    axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } }),
+    axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } }),
   );
   for (const v of result.violations) {
     fail(`[${label}] axe ${v.id} (${v.impact}): ${v.help}`);
@@ -105,6 +105,42 @@ for (const route of routes) {
     await page.goto(base + route, { waitUntil: 'networkidle' });
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     if (overflow > 0) fail(`320px: page is ${overflow}px wider than the viewport`);
+    await ctx.close();
+  }
+
+  // 3b) 200% text-only zoom (WCAG 1.4.4, 2.4.11): the header must not cover the
+  // top of the page or hide a focused element completely.
+  {
+    const ctx = await browser.newContext({ viewport: { width: 800, height: 600 }, reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(base + route, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => window.__hydrated === true);
+    await page.addStyleTag({ content: 'html { font-size: 32px !important; }' });
+    await page.waitForTimeout(300);
+    const covered = await page.evaluate(() => {
+      const hb = document.querySelector('.site-header').getBoundingClientRect().bottom;
+      const first = document.querySelector('main .breadcrumb, main .hero-eyebrow, main h1');
+      return first.getBoundingClientRect().top < hb ? first.textContent.trim().slice(0, 40) : null;
+    });
+    if (covered) fail(`200% text: "${covered}" starts under the header`);
+    for (const dir of ['Tab', 'Shift+Tab']) {
+      await page.evaluate((d) => window.scrollTo(0, d === 'Tab' ? 0 : document.body.scrollHeight), dir);
+      for (let n = 0; n < 40; n++) {
+        await page.keyboard.press(dir);
+        const hidden = await page.evaluate(() => {
+          const el = document.activeElement;
+          const hdr = document.querySelector('.site-header');
+          if (!el || el === document.body || hdr.contains(el) || el.classList.contains('skip-link')) return null;
+          const r = el.getBoundingClientRect();
+          const top = Math.max(r.top, hdr.getBoundingClientRect().bottom);
+          return Math.min(r.bottom, innerHeight) <= top ? el.textContent.trim().slice(0, 40) : null;
+        });
+        if (hidden) {
+          fail(`200% text: focused "${hidden}" is entirely hidden (${dir})`);
+          break;
+        }
+      }
+    }
     await ctx.close();
   }
 

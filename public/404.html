@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" data-motion="full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+    <title>Page not found — Ethan Young</title>
+    <meta name="description" content="This page does not exist.">
+    <link rel="canonical" href="https://ethantyoung.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Page not found — Ethan Young">
+    <meta property="og:description" content="This page does not exist.">
+    <meta property="og:url" content="https://ethantyoung.com">
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        // Runs before first paint: marks JS as available and applies the saved
+        // motion preference so animations never flash on for someone who turned them off.
+        (function () {
+            var d = document.documentElement, pref = null;
+            d.classList.add('js');
+            try { pref = localStorage.getItem('motion'); } catch (e) {}
+            var sys = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (pref === 'reduced' || (pref !== 'full' && sys)) d.setAttribute('data-motion', 'reduced');
+            // If the app never starts, show everything rather than leave content hidden:
+            // immediately when a script fails to load, otherwise after a short wait.
+            var show = function () { if (!window.__hydrated) d.classList.remove('js'); };
+            window.addEventListener('error', function (e) { if (e.target && e.target.tagName === 'SCRIPT') show(); }, true);
+            setTimeout(show, 3000);
+        })();
+    </script>
+  <script type="module" crossorigin src="/assets/index-BqtWAi_S.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-6VafEwOO.css">
+</head>
+<body>
+    <div id="root"><a class="skip-link" href="#main">Skip to content</a><div class="backdrop" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div><div class="dot-grid"></div><div class="spotlight"></div></div><div class="scroll-progress" aria-hidden="true" style="transform:scaleX(0)"></div><header class="site-header"><div class="header-inner"><a class="logo" href="/"><span class="logo-mark" aria-hidden="true"></span>Ethan Young</a><nav aria-label="Main" class="main-nav"><ul><li><a class="nav-link" href="/#experience"><span class="nav-label">Experience</span></a></li><li><a class="nav-link" href="/#education"><span class="nav-label">Education</span></a></li><li><a class="nav-link" href="/projects/"><span class="nav-label">Projects</span></a></li><li><a class="nav-link" href="/#skills"><span class="nav-label">Skills</span></a></li><li><a class="nav-link" href="/#contact"><span class="nav-label">Contact</span></a></li></ul></nav><button type="button" class="motion-toggle" aria-pressed="false"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><g fill="currentColor"><rect x="4" y="3.5" width="2.6" height="9" rx="0.6"></rect><rect x="9.4" y="3.5" width="2.6" height="9" rx="0.6"></rect></g></svg><span class="motion-toggle-text">Pause animations</span></button></div></header><main id="main" tabindex="-1" class="container site-main" style="opacity:1;transform:none"><div class="page-hero"><h1 class="page-title" tabindex="-1">Page not found</h1><p class="page-lede">This page does not exist.</p><p><a class="more-link" href="/"><span class="arrow" aria-hidden="true">←</span> Back to the homepage</a></p></div></main><footer id="contact" class="site-footer"><div class="container"><div class="reveal" style="--d:0ms"><h2 class="section-label"><span class="section-text">Contact</span><span class="section-rule" aria-hidden="true"></span></h2><p class="contact-email-wrap"><a class="contact-email" href="mailto:ethanthanhyoung@gmail.com">ethanthanhyoung@gmail.com</a></p><ul class="contact-links"><li><a href="https://www.linkedin.com/in/ethan-t-young/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ethan-t-young<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://github.com/EthanT-Young" target="_blank" rel="noopener noreferrer">github.com/EthanT-Young<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="/ethanyoung_resume.pdf" target="_blank" rel="noopener">Resume (PDF)<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li></ul><p class="footer-note">Ethan Young<!-- --> · <!-- -->Las Vegas, NV</p></div></div></footer></div>
+</body>
+</html>
