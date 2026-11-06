@@ -16,3 +16,7 @@ PRODUCT.md
 
 # Server-local opt-in marker for deploy/deploy.sh; never committed.
 .deploy
+
+# Build tooling. public/ is build output but IS committed: Caddy serves it as-is.
+node_modules/
+.ssr/

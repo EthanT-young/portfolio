@@ -1,71 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-motion="full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
     <title>Projects — Ethan Young</title>
     <meta name="description" content="Projects by Ethan Young: cloud infrastructure on Oracle Cloud's free tier and applied machine learning.">
     <link rel="canonical" href="https://ethantyoung.com/projects/">
-
     <meta property="og:type" content="website">
     <meta property="og:title" content="Projects — Ethan Young">
     <meta property="og:description" content="Cloud infrastructure on Oracle Cloud's free tier and applied machine learning.">
     <meta property="og:url" content="https://ethantyoung.com/projects/">
-
-    <link rel="stylesheet" href="/style.css?v=6">
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        // Runs before first paint: marks JS as available and applies the saved
+        // motion preference so animations never flash on for someone who turned them off.
+        (function () {
+            var d = document.documentElement, pref = null;
+            d.classList.add('js');
+            try { pref = localStorage.getItem('motion'); } catch (e) {}
+            var sys = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (pref === 'reduced' || (pref !== 'full' && sys)) d.setAttribute('data-motion', 'reduced');
+            // If the app never starts, show everything rather than leave content hidden.
+            setTimeout(function () { if (!window.__hydrated) d.classList.remove('js'); }, 4000);
+        })();
+    </script>
+  <script type="module" crossorigin src="/assets/index-DmHkIrYV.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-VGPNzwVH.css">
 </head>
 <body>
-
-<a class="skip" href="#main">Skip to content</a>
-
-<header>
-    <div class="header-inner">
-        <a class="logo" href="/">Ethan Young</a>
-        <nav aria-label="Main">
-            <a href="/#experience">Experience</a>
-            <a href="/#education">Education</a>
-            <a href="/projects/" aria-current="page">Projects</a>
-            <a href="/#skills">Skills</a>
-            <a href="/#contact">Contact</a>
-        </nav>
-    </div>
-</header>
-
-<main class="container" id="main">
-
-    <div class="page-hero">
-        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span aria-current="page">Projects</span></nav>
-        <h1>Projects</h1>
-        <p>Personal and course projects.</p>
-    </div>
-
-    <section id="projects">
-        <h2 class="sr-only">All projects</h2>
-
-        <div class="project">
-            <div class="project-title"><a href="/projects/cloud-infrastructure/">Personal Cloud Infrastructure</a></div>
-            <time class="role-date" datetime="2026">2026 – Present</time>
-            <div class="project-tech">Docker · Caddy · OCI · Linux</div>
-            <p>An Oracle Cloud Always Free instance that runs this website and several containerized services. Caddy routes each subdomain and manages its HTTPS certificates.</p>
-            <a class="more-link" href="/projects/cloud-infrastructure/">Read more<span class="sr-only"> about Personal Cloud Infrastructure</span> →</a>
-        </div>
-
-        <div class="project">
-            <div class="project-title"><a href="/projects/rebel-locate/">Rebel Locate</a></div>
-            <time class="role-date" datetime="2025-01">Jan 2025 – May 2025</time>
-            <div class="project-tech">Python · PyTorch · scikit-learn · NumPy</div>
-            <p>A team project for my machine learning course that locates the UNLV building a photo was taken near from its GPS metadata and labels the type of room. My KNN model reached 92% accuracy.</p>
-            <a class="more-link" href="/projects/rebel-locate/">Read more<span class="sr-only"> about Rebel Locate</span> →</a>
-        </div>
-    </section>
-
-</main>
-
-<footer id="contact" class="container">
-    <p>Ethan Young · <a href="mailto:ethanthanhyoung@gmail.com">ethanthanhyoung@gmail.com</a></p>
-    <p class="footer-links"><a href="https://www.linkedin.com/in/ethan-t-young/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ethan-t-young</a> · <a href="https://github.com/EthanT-Young" target="_blank" rel="noopener noreferrer">github.com/EthanT-Young</a> · <a href="/ethanyoung_resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></p>
-</footer>
-
-<script src="/script.js"></script>
+    <div id="root"><a class="skip-link" href="#main">Skip to content</a><div class="backdrop" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div><div class="dot-grid"></div><div class="spotlight"></div></div><div class="scroll-progress" aria-hidden="true" style="transform:scaleX(0)"></div><header class="site-header"><div class="header-inner"><a class="logo" href="/"><span class="logo-mark" aria-hidden="true"></span>Ethan Young</a><nav aria-label="Main" class="main-nav"><ul><li><a class="nav-link" href="/#experience"><span class="nav-label">Experience</span></a></li><li><a class="nav-link" href="/#education"><span class="nav-label">Education</span></a></li><li><a class="nav-link is-active" aria-current="page" href="/projects/"><span class="nav-pill" aria-hidden="true"></span><span class="nav-label">Projects</span></a></li><li><a class="nav-link" href="/#skills"><span class="nav-label">Skills</span></a></li><li><a class="nav-link" href="/#contact"><span class="nav-label">Contact</span></a></li></ul></nav><button type="button" class="motion-toggle" aria-pressed="false"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><g fill="currentColor"><rect x="4" y="3.5" width="2.6" height="9" rx="0.6"></rect><rect x="9.4" y="3.5" width="2.6" height="9" rx="0.6"></rect></g></svg><span class="motion-toggle-text">Pause animations</span></button></div></header><main id="main" tabindex="-1" class="container site-main" style="opacity:1;transform:none"><div class="page-hero"><nav class="breadcrumb intro" style="--i:0" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><span aria-current="page">Projects</span></li></ol></nav><h1 class="page-title intro" style="--i:1" tabindex="-1">Projects</h1><p class="page-lede intro" style="--i:2">Personal and course projects.</p></div><section class="section" aria-labelledby="all-projects"><h2 id="all-projects" class="sr-only">All projects</h2><div class="card-list"><article class="reveal card" style="--d:0ms"><span class="card-glow" aria-hidden="true"></span><h3 class="card-title"><a class="card-link" href="/projects/cloud-infrastructure/">Personal Cloud Infrastructure</a></h3><div class="card-meta"><time class="mono-meta" dateTime="2026">2026 – Present</time><span class="tech">Docker · Caddy · OCI · Linux</span></div><p class="card-text">An Oracle Cloud Always Free instance that runs this website and several containerized services. Caddy routes each subdomain and manages its HTTPS certificates.</p><span class="card-cta" aria-hidden="true">Read more <span class="card-arrow">→</span></span></article><article class="reveal card" style="--d:90ms"><span class="card-glow" aria-hidden="true"></span><h3 class="card-title"><a class="card-link" href="/projects/rebel-locate/">Rebel Locate</a></h3><div class="card-meta"><time class="mono-meta" dateTime="2025-01">Jan 2025 – May 2025</time><span class="tech">Python · PyTorch · scikit-learn · NumPy</span></div><p class="card-text">A team project for my machine learning course that locates the UNLV building a photo was taken near from its GPS metadata and labels the type of room. My KNN model reached 92% accuracy.</p><span class="card-cta" aria-hidden="true">Read more <span class="card-arrow">→</span></span></article></div></section></main><footer id="contact" class="site-footer"><div class="container"><div class="reveal" style="--d:0ms"><h2 class="section-label"><span class="section-text">Contact</span><span class="section-rule" aria-hidden="true"></span></h2><p class="contact-email-wrap"><a class="contact-email" href="mailto:ethanthanhyoung@gmail.com">ethanthanhyoung@gmail.com</a></p><ul class="contact-links"><li><a href="https://www.linkedin.com/in/ethan-t-young/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ethan-t-young<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://github.com/EthanT-Young" target="_blank" rel="noopener noreferrer">github.com/EthanT-Young<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="/ethanyoung_resume.pdf" target="_blank" rel="noopener">Resume (PDF)<span class="ext-icon" aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a></li></ul><p class="footer-note">Ethan Young<!-- --> · <!-- -->Las Vegas, NV</p></div></div></footer></div>
 </body>
 </html>

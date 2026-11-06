@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-motion="full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="color-scheme" content="dark">
+    <!--app-head-->
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+        // Runs before first paint: marks JS as available and applies the saved
+        // motion preference so animations never flash on for someone who turned them off.
+        (function () {
+            var d = document.documentElement, pref = null;
+            d.classList.add('js');
+            try { pref = localStorage.getItem('motion'); } catch (e) {}
+            var sys = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (pref === 'reduced' || (pref !== 'full' && sys)) d.setAttribute('data-motion', 'reduced');
+            // If the app never starts, show everything rather than leave content hidden.
+            setTimeout(function () { if (!window.__hydrated) d.classList.remove('js'); }, 4000);
+        })();
+    </script>
+</head>
+<body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+</body>
+</html>
