@@ -83,6 +83,15 @@ export type ProjectSummary = {
 
 export const projects: ProjectSummary[] = [
   {
+    slug: 'code-visualizer',
+    title: 'Code Visualizer',
+    date: 'Nov 2026',
+    datetime: '2026-11',
+    tech: 'React · Python · Java · C++ · Docker',
+    teaser: 'A web app that steps through Java, C++ or Python line by line and draws the arrays, maps, lists, trees and call stack as they change.',
+    summary: 'Step through Java, C++ or Python code line by line and watch arrays, hash maps, linked lists, trees and the call stack change. Java and C++ run in a locked-down container on my server; Python runs in the browser.',
+  },
+  {
     slug: 'cloud-infrastructure',
     title: 'Personal Cloud Infrastructure',
     date: '2026 – Present',
