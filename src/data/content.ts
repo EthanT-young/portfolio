@@ -9,7 +9,7 @@ export const contact = {
   githubLabel: 'github.com/EthanT-Young',
   linkedin: 'https://www.linkedin.com/in/ethan-t-young/',
   linkedinLabel: 'linkedin.com/in/ethan-t-young',
-  resume: '/ethanyoung_resume.pdf',
+  resume: '/Ethan_Young_Resume.pdf',
 };
 
 export type Entry = {
@@ -112,7 +112,7 @@ export const projects: ProjectSummary[] = [
 ];
 
 export const skills: { category: string; items: string[] }[] = [
-  { category: 'Languages', items: ['Python', 'Java', 'C++', 'C#', 'C', 'SQL', 'x86 Assembly', 'MIPS Assembly'] },
-  { category: 'Frameworks & Libraries', items: ['TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'MongoDB', 'PostgreSQL'] },
-  { category: 'Infrastructure & Tools', items: ['Docker', 'OCI', 'AWS', 'Git/GitHub', 'Cisco IOS', 'Juniper Junos', 'NetBox', 'SolarWinds'] },
+  { category: 'Languages', items: ['Java', 'C++', 'C#', 'C', 'Python', 'SQL', 'x86/MIPS Assembly'] },
+  { category: 'Cloud, DevOps & Data', items: ['Docker', 'Caddy', 'Linux', 'OCI', 'AWS', 'Git/GitHub', 'PostgreSQL'] },
+  { category: 'Networking & Infrastructure', items: ['Juniper Junos', 'Cisco IOS', 'Infoblox', 'NetBox', 'SolarWinds', 'OpManager', 'EcoStruxure'] },
 ];
