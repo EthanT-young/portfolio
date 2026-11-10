@@ -92,6 +92,15 @@ export const projects: ProjectSummary[] = [
     summary: 'Step through Java, C++ or Python code line by line and watch arrays, hash maps, linked lists, trees and the call stack change. Java and C++ run in a locked-down container on my server; Python runs in the browser.',
   },
   {
+    slug: 'kibitz-chess',
+    title: 'Kibitz',
+    date: 'Nov 2026',
+    datetime: '2026-11',
+    tech: 'React · TypeScript · Stockfish (WebAssembly) · Docker',
+    teaser: 'A free chess game review that runs Stockfish in your browser, gives every move a verdict and explains it in plain English.',
+    summary: 'Import a game from Chess.com or Lichess and get accuracy, a verdict on every move and a coach that explains what each move did. Stockfish runs in your browser, so my server only serves static files.',
+  },
+  {
     slug: 'cloud-infrastructure',
     title: 'Personal Cloud Infrastructure',
     date: '2026 – Present',
