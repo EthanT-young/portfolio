@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 const require = createRequire(import.meta.url);
 const axeSource = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8');
 const root = path.resolve('public');
-const routes = ['/', '/projects/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
+const routes = ['/', '/projects/', '/projects/kibitz-chess/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
 const shots = process.env.SHOTS;
 if (shots) await mkdir(shots, { recursive: true });
 

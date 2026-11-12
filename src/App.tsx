@@ -5,7 +5,9 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { EASE, MotionProvider } from './motion';
 import { CloudInfrastructure } from './pages/CloudInfrastructure';
+import { CodeVisualizer } from './pages/CodeVisualizer';
 import { Home } from './pages/Home';
+import { Kibitz } from './pages/Kibitz';
 import { NotFound } from './pages/NotFound';
 import { Projects } from './pages/Projects';
 import { RebelLocate } from './pages/RebelLocate';
@@ -40,6 +42,8 @@ export function App() {
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/code-visualizer" element={<CodeVisualizer />} />
+            <Route path="/projects/kibitz-chess" element={<Kibitz />} />
             <Route path="/projects/cloud-infrastructure" element={<CloudInfrastructure />} />
             <Route path="/projects/rebel-locate" element={<RebelLocate />} />
             <Route path="*" element={<NotFound />} />

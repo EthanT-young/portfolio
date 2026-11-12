@@ -22,9 +22,21 @@ export const routes: RouteMeta[] = [
   {
     path: '/projects/',
     title: 'Projects — Ethan Young',
-    description: "Projects by Ethan Young: cloud infrastructure on Oracle Cloud's free tier and applied machine learning.",
+    description: "Projects by Ethan Young: a code visualizer, a chess game review, cloud infrastructure on Oracle Cloud's free tier, and applied machine learning.",
     ogType: 'website',
-    ogDescription: "Cloud infrastructure on Oracle Cloud's free tier and applied machine learning.",
+    ogDescription: "A code visualizer, a chess game review, cloud infrastructure on Oracle Cloud's free tier, and applied machine learning.",
+  },
+  {
+    path: '/projects/code-visualizer/',
+    title: 'Code Visualizer — Ethan Young',
+    description: 'A web app for stepping through Java, C++ or Python code line by line and watching arrays, maps, linked lists, trees and the call stack change.',
+    ogType: 'article',
+  },
+  {
+    path: '/projects/kibitz-chess/',
+    title: 'Kibitz — Ethan Young',
+    description: 'A free chess game review in the browser: Stockfish analysis, move verdicts, accuracy and a rule-based coach that explains each move.',
+    ogType: 'article',
   },
   {
     path: '/projects/cloud-infrastructure/',

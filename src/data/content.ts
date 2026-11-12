@@ -9,7 +9,7 @@ export const contact = {
   githubLabel: 'github.com/EthanT-Young',
   linkedin: 'https://www.linkedin.com/in/ethan-t-young/',
   linkedinLabel: 'linkedin.com/in/ethan-t-young',
-  resume: '/ethanyoung_resume.pdf',
+  resume: '/Ethan_Young_Resume.pdf',
 };
 
 export type Entry = {
@@ -83,6 +83,24 @@ export type ProjectSummary = {
 
 export const projects: ProjectSummary[] = [
   {
+    slug: 'code-visualizer',
+    title: 'Code Visualizer',
+    date: 'Nov 2026',
+    datetime: '2026-11',
+    tech: 'React · Python · Java · C++ · Docker',
+    teaser: 'A web app that steps through Java, C++ or Python line by line and draws the arrays, maps, lists, trees and call stack as they change.',
+    summary: 'Step through Java, C++ or Python code line by line and watch arrays, hash maps, linked lists, trees and the call stack change. Java and C++ run in a locked-down container on my server; Python runs in the browser.',
+  },
+  {
+    slug: 'kibitz-chess',
+    title: 'Kibitz',
+    date: 'Nov 2026',
+    datetime: '2026-11',
+    tech: 'React · TypeScript · Stockfish (WebAssembly) · Docker',
+    teaser: 'A free chess game review that runs Stockfish in your browser, gives every move a verdict and explains it in plain English.',
+    summary: 'Import a game from Chess.com or Lichess and get accuracy, a verdict on every move and a coach that explains what each move did. Stockfish runs in your browser, so my server only serves static files.',
+  },
+  {
     slug: 'cloud-infrastructure',
     title: 'Personal Cloud Infrastructure',
     date: '2026 – Present',
@@ -103,7 +121,7 @@ export const projects: ProjectSummary[] = [
 ];
 
 export const skills: { category: string; items: string[] }[] = [
-  { category: 'Languages', items: ['Python', 'Java', 'C++', 'C#', 'C', 'SQL', 'x86 Assembly', 'MIPS Assembly'] },
-  { category: 'Frameworks & Libraries', items: ['TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'MongoDB', 'PostgreSQL'] },
-  { category: 'Infrastructure & Tools', items: ['Docker', 'OCI', 'AWS', 'Git/GitHub', 'Cisco IOS', 'Juniper Junos', 'NetBox', 'SolarWinds'] },
+  { category: 'Languages', items: ['Java', 'C++', 'C#', 'C', 'Python', 'SQL', 'x86/MIPS Assembly'] },
+  { category: 'Cloud, DevOps & Data', items: ['Docker', 'Caddy', 'Linux', 'OCI', 'AWS', 'Git/GitHub', 'PostgreSQL'] },
+  { category: 'Networking & Infrastructure', items: ['Juniper Junos', 'Cisco IOS', 'Infoblox', 'NetBox', 'SolarWinds', 'OpManager', 'EcoStruxure'] },
 ];
