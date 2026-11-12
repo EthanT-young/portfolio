@@ -9,7 +9,7 @@ export function RebelLocate() {
       <PageHero
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Projects', to: '/projects/' }, { label: 'Rebel Locate' }]}
         title="Rebel Locate"
-        lede="A team project for my machine learning course: locating the UNLV building a photo was taken near from its GPS metadata, and labeling the type of room. On the team's 6,000+ image dataset, my KNN building model reached 98.01% accuracy and my CNN room model reached 91.83%."
+        lede="A team project for my machine learning course. Rebel Locate reads a photo's GPS metadata to work out which UNLV building it was taken near, then identifies what kind of room it shows. My KNN model picked the right building 98.01% of the time, and my CNN labeled the room correctly 91.83% of the time."
         meta={
           <>
             <time className="mono-meta" dateTime="2025-01">
@@ -36,53 +36,27 @@ export function RebelLocate() {
         </div>
       </Reveal>
 
-      <DetailSection title="Overview">
-        <Reveal className="prose">
-          <p>Rebel Locate is a geolocator and room-labeling tool for UNLV. This page covers my implementation.</p>
-        </Reveal>
-      </DetailSection>
-
       <DetailSection title="Approach">
         <Reveal className="prose">
           <p>
-            We split the main campus between us, and each of us photographed every building in our section. After
-            agreeing on a shared design, we each built our own implementation and compared results across the team.
+            We split the main campus between the five of us, and each person photographed every building in their
+            section. After agreeing on a shared design, we each built our own version and compared results.
           </p>
-          <p>My implementation:</p>
           <ul className="dash-list">
             <li>
-              <strong>Building (KNN).</strong> A K-nearest neighbors classifier trained on the latitude and longitude
-              from each photo's EXIF metadata, with K chosen by 10-fold cross-validation.
+              A K-nearest neighbors classifier predicts the building from the latitude and longitude in each photo's
+              EXIF data. I chose K with 10-fold cross-validation.
             </li>
             <li>
-              <strong>Room (CNN).</strong> Takes only the predicted building's photos and fine-tunes the last layer of a
-              ResNet-18 pre-trained on Places365, a scene-recognition dataset, with one output per room in that building
-              (such as hallway, lounge or stairwell).
+              A CNN then looks only at that building's photos. It fine-tunes the last layer of a ResNet-18 pre-trained
+              on Places365 (a scene-recognition dataset), with one output per room type, such as hallway, lounge or
+              stairwell.
             </li>
             <li>
-              <strong>No near-duplicate leakage.</strong> Photos taken within about a meter of each other, such as burst
-              shots, always stay on the same side of every training/testing split, so near-duplicates can't inflate the
-              reported accuracy.
+              Photos taken at the same spot, like burst shots, stay together on one side of every train/test split, so
+              near-duplicates can't inflate the accuracy.
             </li>
-            <li>
-              <strong>Output.</strong> The top three buildings and rooms for a photo, each with its probability.
-            </li>
-          </ul>
-        </Reveal>
-      </DetailSection>
-
-      <DetailSection title="Results">
-        <Reveal className="prose">
-          <ul className="dash-list">
-            <li>
-              <strong>6,000+ images</strong> in the team's dataset, covering every building on the main campus.
-            </li>
-            <li>
-              <strong>98.01% accuracy</strong> for my KNN building-proximity model.
-            </li>
-            <li>
-              <strong>91.83% accuracy</strong> for my CNN room-labeling model.
-            </li>
+            <li>For a new photo, it prints up to three likely buildings and rooms, each with its probability.</li>
           </ul>
         </Reveal>
       </DetailSection>
@@ -95,8 +69,7 @@ export function RebelLocate() {
         <Reveal className="prose">
           <ul className="dash-list">
             <li>
-              <ExtLink href="https://github.com/EthanT-young/Rebel-Locate">Source code on GitHub</ExtLink> (my
-              implementation)
+              <ExtLink href="https://github.com/EthanT-young/Rebel-Locate">Source code on GitHub</ExtLink>
             </li>
           </ul>
         </Reveal>

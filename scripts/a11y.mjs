@@ -1,7 +1,7 @@
 // Accessibility and smoke tests against the built site in public/.
 //   npm run build && npm run test:a11y
 // Serves public/ like Caddy's file_server (directory index.html, no SPA
-// fallback), then for every route: runs axe-core with the WCAG 2.0 A/AA rules,
+// fallback), then for every route: runs axe-core with the WCAG 2.2 A/AA rules (2.0, 2.1 and 2.2 tags),
 // fails on console errors (e.g. hydration mismatches), checks 320px reflow,
 // the skip link, rendering without JavaScript, and in-app navigation focus.
 // Set SHOTS=dir to also save screenshots.
@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 const require = createRequire(import.meta.url);
 const axeSource = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8');
 const root = path.resolve('public');
-const routes = ['/', '/projects/', '/projects/kibitz-chess/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
+const routes = ['/', '/projects/', '/projects/code-visualizer/', '/projects/kibitz-chess/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
 const shots = process.env.SHOTS;
 if (shots) await mkdir(shots, { recursive: true });
 
@@ -50,7 +50,7 @@ async function axe(page, label) {
   await page.addScriptTag({ content: axeSource });
   const result = await page.evaluate(() =>
     // eslint-disable-next-line no-undef
-    axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } }),
+    axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } }),
   );
   for (const v of result.violations) {
     fail(`[${label}] axe ${v.id} (${v.impact}): ${v.help}`);
@@ -108,6 +108,42 @@ for (const route of routes) {
     await ctx.close();
   }
 
+  // 3b) 200% text-only zoom (WCAG 1.4.4, 2.4.11): the header must not cover the
+  // top of the page or hide a focused element completely.
+  {
+    const ctx = await browser.newContext({ viewport: { width: 800, height: 600 }, reducedMotion: 'reduce' });
+    const page = await ctx.newPage();
+    await page.goto(base + route, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => window.__hydrated === true);
+    await page.addStyleTag({ content: 'html { font-size: 32px !important; }' });
+    await page.waitForTimeout(300);
+    const covered = await page.evaluate(() => {
+      const hb = document.querySelector('.site-header').getBoundingClientRect().bottom;
+      const first = document.querySelector('main .breadcrumb, main .hero-eyebrow, main h1');
+      return first.getBoundingClientRect().top < hb ? first.textContent.trim().slice(0, 40) : null;
+    });
+    if (covered) fail(`200% text: "${covered}" starts under the header`);
+    for (const dir of ['Tab', 'Shift+Tab']) {
+      await page.evaluate((d) => window.scrollTo(0, d === 'Tab' ? 0 : document.body.scrollHeight), dir);
+      for (let n = 0; n < 40; n++) {
+        await page.keyboard.press(dir);
+        const hidden = await page.evaluate(() => {
+          const el = document.activeElement;
+          const hdr = document.querySelector('.site-header');
+          if (!el || el === document.body || hdr.contains(el) || el.classList.contains('skip-link')) return null;
+          const r = el.getBoundingClientRect();
+          const top = Math.max(r.top, hdr.getBoundingClientRect().bottom);
+          return Math.min(r.bottom, innerHeight) <= top ? el.textContent.trim().slice(0, 40) : null;
+        });
+        if (hidden) {
+          fail(`200% text: focused "${hidden}" is entirely hidden (${dir})`);
+          break;
+        }
+      }
+    }
+    await ctx.close();
+  }
+
   // 4) No JavaScript: prerendered content is present and visible.
   {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
@@ -138,7 +174,7 @@ for (const route of routes) {
   if (afterSkip !== 'main') fail(`skip link moved focus to "${afterSkip}", expected #main`);
 
   // In-app navigation: title updates and focus moves to the new page's h1.
-  await page.click('a.card-link >> nth=0');
+  await page.click('a.card-link[href="/projects/cloud-infrastructure/"]');
   await page.waitForURL('**/projects/cloud-infrastructure/');
   await page.waitForTimeout(800);
   const nav = await page.evaluate(() => ({
@@ -163,7 +199,7 @@ for (const route of routes) {
   await page.evaluate(() => document.getElementById('projects').scrollIntoView());
   await page.waitForTimeout(300);
   const before = await page.evaluate(() => window.scrollY);
-  await page.click('a.card-link >> nth=0');
+  await page.click('a.card-link[href="/projects/cloud-infrastructure/"]');
   await page.waitForURL('**/projects/cloud-infrastructure/');
   await page.waitForTimeout(800);
   await page.goBack();

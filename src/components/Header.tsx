@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import { useMotionPref } from '../motion';
@@ -24,6 +24,32 @@ export function Header() {
   const active = onProjects ? 'projects' : spied;
   const { reduced, toggle } = useMotionPref();
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Reserve exactly as much space as the header really takes. Its height grows
+  // with text-only zoom and text spacing, which the CSS fallback can't predict.
+  // If it would cover more than 30% of the window, let it scroll away instead
+  // of staying fixed over the content (WCAG 1.4.4, 2.4.11).
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const root = document.documentElement;
+    const update = () => {
+      const h = el.offsetHeight;
+      root.style.setProperty('--header-offset', `${h}px`);
+      root.classList.toggle('header-unpinned', h > window.innerHeight * 0.3);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener('resize', update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+      root.style.removeProperty('--header-offset');
+      root.classList.remove('header-unpinned');
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -40,7 +66,7 @@ export function Header() {
   };
 
   return (
-    <header className={scrolled ? 'site-header is-scrolled' : 'site-header'}>
+    <header ref={headerRef} className={scrolled ? 'site-header is-scrolled' : 'site-header'}>
       <div className="header-inner">
         <Link className="logo" to="/" onClick={onLogo}>
           <span className="logo-mark" aria-hidden="true" />
@@ -67,7 +93,7 @@ export function Header() {
                     <Link
                       to={item.to}
                       className={cls}
-                      aria-current={pathname === item.to ? 'page' : isActive ? 'true' : undefined}
+                      aria-current={pathname === item.to ? 'page' : onProjects ? 'true' : undefined}
                     >
                       {pill}
                       {label}

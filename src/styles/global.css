@@ -51,6 +51,9 @@
     --max: 960px;
     --gutter: clamp(1rem, 4vw, 2rem);
     --header-h: 4.25rem;
+    /* Space reserved above content for the fixed header. Header.tsx overwrites it
+       with the measured height, so text-only zoom can't push the header over content. */
+    --header-offset: var(--header-h);
 }
 
 /* ---------- Base ---------- */
@@ -65,7 +68,7 @@
 
 html {
     background: var(--bg);
-    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+    scroll-padding-top: calc(var(--header-offset) + 1.5rem);
     -webkit-text-size-adjust: 100%;
 }
 
@@ -290,6 +293,16 @@ strong {
     transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
+/* When enlarged text makes the header tall relative to the window, it scrolls
+   away with the page instead of covering content and focused links (1.4.4, 2.4.11). */
+html.header-unpinned .site-header {
+    position: absolute;
+}
+
+html.header-unpinned {
+    scroll-padding-top: 1.5rem;
+}
+
 .site-header.is-scrolled {
     background: rgba(10, 10, 11, 0.88);
     border-bottom-color: var(--border);
@@ -499,7 +512,7 @@ html.js:not([data-motion='reduced']) .reveal:not(.is-in):not(.tags-wrap):not(:fo
     gap: 2.5rem;
     align-items: end;
     min-height: min(92vh, 52rem);
-    padding: calc(var(--header-h) + 5rem) 0 6rem;
+    padding: calc(var(--header-offset) + 5rem) 0 6rem;
 }
 
 @media (min-width: 880px) {
@@ -1122,7 +1135,7 @@ html.js:not([data-motion='reduced']) .tags-wrap:not(.is-in) .tag {
 /* ---------- Subpages ---------- */
 
 .page-hero {
-    padding: calc(var(--header-h) + 4.5rem) 0 2.5rem;
+    padding: calc(var(--header-offset) + 4.5rem) 0 2.5rem;
 }
 
 .breadcrumb ol {
