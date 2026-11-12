@@ -15,7 +15,7 @@ import { chromium } from 'playwright';
 const require = createRequire(import.meta.url);
 const axeSource = await readFile(require.resolve('axe-core/axe.min.js'), 'utf8');
 const root = path.resolve('public');
-const routes = ['/', '/projects/', '/projects/kibitz-chess/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
+const routes = ['/', '/projects/', '/projects/code-visualizer/', '/projects/kibitz-chess/', '/projects/cloud-infrastructure/', '/projects/rebel-locate/'];
 const shots = process.env.SHOTS;
 if (shots) await mkdir(shots, { recursive: true });
 
@@ -174,7 +174,7 @@ for (const route of routes) {
   if (afterSkip !== 'main') fail(`skip link moved focus to "${afterSkip}", expected #main`);
 
   // In-app navigation: title updates and focus moves to the new page's h1.
-  await page.click('a.card-link >> nth=0');
+  await page.click('a.card-link[href="/projects/cloud-infrastructure/"]');
   await page.waitForURL('**/projects/cloud-infrastructure/');
   await page.waitForTimeout(800);
   const nav = await page.evaluate(() => ({
@@ -199,7 +199,7 @@ for (const route of routes) {
   await page.evaluate(() => document.getElementById('projects').scrollIntoView());
   await page.waitForTimeout(300);
   const before = await page.evaluate(() => window.scrollY);
-  await page.click('a.card-link >> nth=0');
+  await page.click('a.card-link[href="/projects/cloud-infrastructure/"]');
   await page.waitForURL('**/projects/cloud-infrastructure/');
   await page.waitForTimeout(800);
   await page.goBack();
